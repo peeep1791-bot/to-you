@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You...</title>
+    <style>
+        /* Importing aesthetic fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* A deep, moody, but romantic animated gradient background */
+            background: linear-gradient(-45deg, #1a0b2e, #4b1d52, #852d62, #bd406b);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            color: #f8f8f8;
+            text-align: center;
+            position: relative; 
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Enhanced Glassmorphism Card */
+        .container {
+            z-index: 10;
+            background: rgba(20, 20, 20, 0.4);
+            backdrop-filter: blur(15px);
+            padding: 50px 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 550px;
+            width: 90%;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 10px;
+            color: #ffb6c1;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            margin-top: 0;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #e0e0e0;
+        }
+
+        /* Small caption style for the joke */
+        .joke-caption {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #aaa;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Playful Interactive Button */
+        #playfulBtn {
+            background: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            position: relative; 
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+        }
+
+        #playfulBtn:hover {
+            box-shadow: 0 8px 25px rgba(255, 117, 140, 0.6);
+        }
+
+        /* The Final Proposal Area (Hidden initially) */
+        #proposal-area {
+            display: none;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .ring-icon {
+            font-size: 3rem;
+            margin: 20px 0;
+            animation: ringPulse 2s infinite;
+        }
+
+        @keyframes ringPulse {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(10deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .question {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ffb6c1;
+            margin: 15px 0;
+        }
+
+        /* --- Anya Character Styles --- */
+        .anime-dancer {
+            position: absolute;
+            bottom: 10px;
+            width: 130px; 
+            height: 130px;
+            z-index: 5;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.9;
+        }
+
+        /* Left Anya */
+        .dancer-left {
+            left: 20px;
+            background-image: url('https://media.tenor.com/2YxU4eG7R18AAAAi/anya-dancing-spy-x-family.gif'); 
+        }
+
+        /* Right Anya (Flipped so she dances inward) */
+        .dancer-right {
+            right: 20px;
+            background-image: url('https://media.tenor.com/2YxU4eG7R18AAAAi/anya-dancing-spy-x-family.gif');
+            transform: scaleX(-1); /* Flips the GIF horizontally */
+        }
+
+        /* Atmospheric Sparkles */
+        .sparkle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            z-index: 1;
+            animation: floatUp 4s linear infinite, glow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatUp {
+            to { transform: translateY(-120vh); }
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 2px white; opacity: 0.4;}
+            to { box-shadow: 0 0 10px white, 0 0 20px #ffb6c1; opacity: 1;}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="anime-dancer dancer-left" id="dancer1"></div>
+    <div class="anime-dancer dancer-right" id="dancer2"></div>
+
+    <div class="container" id="card">
+        <h1>Happy Birthday</h1>
+        
+        <div id="intro-area">
+            <p id="intro-text">
+                I know the last 10 months have been hard, and I know I've given you reasons to be angry. 
+                But today is about you. I wanted to make you something special to say I'm sorry, and to show you that you mean everything to me.
+		namma asst sports secretary ah irukum bodhu nalla jolly ah irundhuchu na andha days ah miss panren... sorry for everthing 😓
+            </p>
+            <span class="joke-caption">(Try to click the button if you forgive me... even a little bit)</span>
+            
+            <button id="playfulBtn">I'll hear you out...</button>
+        </div>
+
+        <div id="proposal-area">
+            <p>You caught it. Just like you caught my heart.</p>
+            <p>I don't want to fight anymore. I just want to spend the rest of my life making it up to you and making you happy.</p>
+            
+            <div class="ring-icon">💍</div>
+            
+            <div class="question">Will you be my jaanu?</div>
+        </div>
+    </div>
+
+    <script>
+        const playfulBtn = document.getElementById('playfulBtn');
+        const introArea = document.getElementById('intro-area');
+        const proposalArea = document.getElementById('proposal-area');
+        let hoverCount = 0;
+
+        // Playful button movement 
+        playfulBtn.addEventListener('mouseover', function() {
+            // Move the button away a few times before letting her click it
+            if (hoverCount < 4) {
+                const maxX = 100; 
+                const maxY = 50;  
+                
+                const randomX = Math.floor(Math.random() * maxX * 2) - maxX;
+                const randomY = Math.floor(Math.random() * maxY * 2) - maxY;
+
+                playfulBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                hoverCount++;
+            } else {
+                // After 4 attempts, let it stay still
+                playfulBtn.style.transform = 'translate(0px, 0px)';
+            }
+        });
+
+        // The final reveal
+        playfulBtn.addEventListener('click', () => {
+            // Fade out intro
+            introArea.style.display = 'none';
+            
+            // Show proposal area
+            proposalArea.style.display = 'block';
+            
+            // Trigger reflow to ensure the display change registers
+            void proposalArea.offsetWidth; 
+            
+            proposalArea.style.opacity = 1;
+
+            createSparkles();
+        });
+
+        // Background atmosphere
+        function createSparkles() {
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.classList.add('sparkle');
+                    
+                    const size = Math.random() * 4 + 2; 
+                    sparkle.style.width = `${size}px`;
+                    sparkle.style.height = `${size}px`;
+                    
+                    sparkle.style.left = Math.random() * 100 + 'vw';
+                    sparkle.style.top = '100vh';
+                    sparkle.style.animationDuration = Math.random() * 3 + 3 + 's';
+                    
+                    document.body.appendChild(sparkle);
+
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 6000);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
