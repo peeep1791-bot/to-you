@@ -2,20 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For You...</title>
     <style>
-        /* Importing aesthetic fonts */
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500;700&display=swap');
 
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* A deep, moody, but romantic animated gradient background */
             background: linear-gradient(-45deg, #1a0b2e, #4b1d52, #852d62, #bd406b);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -32,68 +30,62 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Enhanced Glassmorphism Card */
         .container {
             z-index: 10;
             background: rgba(20, 20, 20, 0.4);
             backdrop-filter: blur(15px);
-            padding: 50px 40px;
+            -webkit-backdrop-filter: blur(15px);
+            padding: 30px 20px;
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            max-width: 550px;
-            width: 90%;
+            max-width: 90%;
+            width: 400px;
             position: relative;
+            box-sizing: border-box;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
+            /* Responsively scales font between 2.5rem and 4rem */
+            font-size: clamp(2.5rem, 10vw, 4rem);
             margin-bottom: 10px;
             color: #ffb6c1;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
             margin-top: 0;
-            letter-spacing: 2px;
         }
 
         p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 25px;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
             color: #e0e0e0;
         }
 
-        /* Small caption style for the joke */
         .joke-caption {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-style: italic;
             color: #aaa;
-            margin-top: -10px;
             margin-bottom: 20px;
             display: block;
         }
 
-        /* Playful Interactive Button */
         #playfulBtn {
             background: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
             border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
+            padding: 15px 30px;
+            border-radius: 30px;
             font-size: 1rem;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             color: white;
             cursor: pointer;
             position: relative; 
-            transition: box-shadow 0.3s ease, transform 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+            touch-action: manipulation; /* Optimizes for mobile tapping */
         }
 
-        #playfulBtn:hover {
-            box-shadow: 0 8px 25px rgba(255, 117, 140, 0.6);
-        }
-
-        /* The Final Proposal Area (Hidden initially) */
         #proposal-area {
             display: none;
             opacity: 0;
@@ -102,7 +94,7 @@
 
         .ring-icon {
             font-size: 3rem;
-            margin: 20px 0;
+            margin: 15px 0;
             animation: ringPulse 2s infinite;
         }
 
@@ -114,80 +106,66 @@
 
         .question {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #ffb6c1;
-            margin: 15px 0;
         }
 
-        /* --- Anya Character Styles --- */
+        /* --- Anime Characters Mobile Optimization --- */
         .anime-dancer {
             position: absolute;
-            bottom: 10px;
-            width: 130px; 
-            height: 130px;
+            bottom: 5px;
+            width: 80px; /* Smaller for mobile */
+            height: 80px;
             z-index: 5;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            opacity: 0.9;
+            opacity: 0.8;
+            pointer-events: none; /* Prevents them from blocking clicks */
         }
 
-        /* Left Anya */
-        .dancer-left {
-            left: 20px;
-            background-image: url('https://media.tenor.com/2YxU4eG7R18AAAAi/anya-dancing-spy-x-family.gif'); 
+        @media (min-width: 600px) {
+            .anime-dancer { width: 130px; height: 130px; }
+            .container { padding: 50px 40px; }
         }
 
-        /* Right Anya (Flipped so she dances inward) */
-        .dancer-right {
-            right: 20px;
-            background-image: url('https://media.tenor.com/2YxU4eG7R18AAAAi/anya-dancing-spy-x-family.gif');
-            transform: scaleX(-1); /* Flips the GIF horizontally */
-        }
+        .dancer-left { left: 5px; background-image: url('https://media.tenor.com/2YxU4eG7R18AAAAi/anya-dancing-spy-x-family.gif'); }
+        .dancer-right { right: 5px; background-image: url('https://media.tenor.com/2YxU4eG7R18AAAAi/anya-dancing-spy-x-family.gif'); transform: scaleX(-1); }
 
-        /* Atmospheric Sparkles */
         .sparkle {
             position: absolute;
             background: white;
             border-radius: 50%;
-            z-index: 1;
+            pointer-events: none;
             animation: floatUp 4s linear infinite, glow 1s ease-in-out infinite alternate;
         }
 
-        @keyframes floatUp {
-            to { transform: translateY(-120vh); }
-        }
-        @keyframes glow {
-            from { box-shadow: 0 0 2px white; opacity: 0.4;}
-            to { box-shadow: 0 0 10px white, 0 0 20px #ffb6c1; opacity: 1;}
-        }
+        @keyframes floatUp { to { transform: translateY(-110vh); } }
+        @keyframes glow { from { opacity: 0.4; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <div class="anime-dancer dancer-left" id="dancer1"></div>
-    <div class="anime-dancer dancer-right" id="dancer2"></div>
+    <div class="anime-dancer dancer-left"></div>
+    <div class="anime-dancer dancer-right"></div>
 
-    <div class="container" id="card">
+    <div class="container">
         <h1>Happy Birthday</h1>
         
         <div id="intro-area">
-            <p id="intro-text">
-                I know the last 10 months have been hard, and I know I've given you reasons to be angry. 
-                But today is about you. I wanted to make you something special to say I'm sorry, and to show you that you mean everything to me.
-		namma asst sports secretary ah irukum bodhu nalla jolly ah irundhuchu na andha days ah miss panren... sorry for everthing 😓
+            <p>
+                I know the last 10 months have been hard. I wanted to make you something special to say I'm sorry, and to show you that you mean everything to me.
+                <br><br>
+                <i>namma asst sports secretary ah irukum bodhu nalla jolly ah irundhuchu na andha days ah miss panren... sorry for everthing 😓</i>
             </p>
-            <span class="joke-caption">(Try to click the button if you forgive me... even a little bit)</span>
-            
+            <span class="joke-caption">(Catch the button if you forgive me...)</span>
             <button id="playfulBtn">I'll hear you out...</button>
         </div>
 
         <div id="proposal-area">
             <p>You caught it. Just like you caught my heart.</p>
-            <p>I don't want to fight anymore. I just want to spend the rest of my life making it up to you and making you happy.</p>
-            
+            <p>I don't want to fight anymore. I just want to make you happy.</p>
             <div class="ring-icon">💍</div>
-            
             <div class="question">Will you be my jaanu?</div>
         </div>
     </div>
@@ -198,12 +176,11 @@
         const proposalArea = document.getElementById('proposal-area');
         let hoverCount = 0;
 
-        // Playful button movement 
-        playfulBtn.addEventListener('mouseover', function() {
-            // Move the button away a few times before letting her click it
+        function moveButton() {
             if (hoverCount < 4) {
-                const maxX = 100; 
-                const maxY = 50;  
+                // Reduced range for mobile screens
+                const maxX = 60; 
+                const maxY = 40;  
                 
                 const randomX = Math.floor(Math.random() * maxX * 2) - maxX;
                 const randomY = Math.floor(Math.random() * maxY * 2) - maxY;
@@ -211,48 +188,42 @@
                 playfulBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
                 hoverCount++;
             } else {
-                // After 4 attempts, let it stay still
                 playfulBtn.style.transform = 'translate(0px, 0px)';
+            }
+        }
+
+        // Listen for both mouse and touch
+        playfulBtn.addEventListener('mouseover', moveButton);
+        playfulBtn.addEventListener('touchstart', (e) => {
+            if (hoverCount < 4) {
+                e.preventDefault(); // Prevents clicking until hoverCount is met
+                moveButton();
             }
         });
 
-        // The final reveal
         playfulBtn.addEventListener('click', () => {
-            // Fade out intro
-            introArea.style.display = 'none';
-            
-            // Show proposal area
-            proposalArea.style.display = 'block';
-            
-            // Trigger reflow to ensure the display change registers
-            void proposalArea.offsetWidth; 
-            
-            proposalArea.style.opacity = 1;
-
-            createSparkles();
+            if (hoverCount >= 4) {
+                introArea.style.display = 'none';
+                proposalArea.style.display = 'block';
+                setTimeout(() => { proposalArea.style.opacity = 1; }, 50);
+                createSparkles();
+            }
         });
 
-        // Background atmosphere
         function createSparkles() {
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 40; i++) {
                 setTimeout(() => {
                     const sparkle = document.createElement('div');
                     sparkle.classList.add('sparkle');
-                    
                     const size = Math.random() * 4 + 2; 
                     sparkle.style.width = `${size}px`;
                     sparkle.style.height = `${size}px`;
-                    
                     sparkle.style.left = Math.random() * 100 + 'vw';
                     sparkle.style.top = '100vh';
-                    sparkle.style.animationDuration = Math.random() * 3 + 3 + 's';
-                    
+                    sparkle.style.animationDuration = Math.random() * 2 + 3 + 's';
                     document.body.appendChild(sparkle);
-
-                    setTimeout(() => {
-                        sparkle.remove();
-                    }, 6000);
-                }, i * 50);
+                    setTimeout(() => sparkle.remove(), 4000);
+                }, i * 70);
             }
         }
     </script>
